@@ -59,3 +59,17 @@ update Employee_Payroll set BasicPay=70000 where id =3;
 ------------------UC10 (Add info about tersa working in two different department)----------------------
 INSERT INTO Employee_Payroll  values('Teresa',75000,'2020-03-05','F','1234567890','112/234','HR',60000,10000,2300,1200,7203);
 INSERT INTO Employee_Payroll  values('Teresa',75000,'2020-03-05','F','1234567890','112/234','Marketing',60000,10000,2300,1200,7203);
+--------------------UC11(ER- Representation)-----------------------------------------------------------
+use Payroll_service;
+create Table Employee_Service(
+service_id int identity(1,1),
+Employee_id int FOREIGN Key references Employee_Payroll(id),
+Department_id int FOREIGN Key references EMP_DEPARTMENT(department_id),
+);
+select * from Employee_Service;
+select * from EMP_DEPARTMENT;
+select * from Employee_Payroll;
+insert into Employee_Service values(2,3);
+select Employee_Payroll.Name,EMP_DEPARTMENT.department_name from ((Employee_Service inner join Employee_Payroll on Employee_Service.service_id=Employee_Payroll.id)inner join EMP_DEPARTMENT on Employee_Service.service_id=Employee_Payroll.id); 
+
+ 
